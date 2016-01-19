@@ -1,0 +1,1 @@
+var loadNewData=true;function pullConsulltation(b,a){if(loadNewData){$.ajax({type:"POST",url:rootPath+"/consultation/apply/pullData.json",data:{status:a},dataType:"json",success:function(d){if(d!=null){console.info(d);if(loadNewData){var c={rows:[]};c.rows.push(d);$("#"+b).datagrid("load",c)}}else{}pullConsulltation(b)}})}};

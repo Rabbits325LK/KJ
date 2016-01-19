@@ -1,0 +1,9 @@
+;C++Builder-generated INF file for WebPacsActive.ocx
+[Add.Code]
+WebPacsActive.ocx=WebPacsActive.ocx
+
+[WebPacsActive.ocx]
+file=WebPacsActive.cab
+clsid={A7F56519-379A-45D5-836D-CB85C89508C4}
+RegisterServer=yes
+FileVersion=1,0,74,62

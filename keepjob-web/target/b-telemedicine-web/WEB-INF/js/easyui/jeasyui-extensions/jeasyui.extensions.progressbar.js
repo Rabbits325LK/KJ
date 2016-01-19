@@ -1,0 +1,1 @@
+(function(c,e){c.fn.progressbar.extensions={};function b(h,i){var f=c(h),g=f.progressbar("options");f.find(".progressbar-text").text(g.text=i)}var d=c.fn.progressbar.extensions.defaults={};var a=c.fn.progressbar.extensions.methods={setText:function(g,f){return g.each(function(){b(this,f)})}};c.extend(c.fn.progressbar.defaults,d);c.extend(c.fn.progressbar.methods,a)})(jQuery);

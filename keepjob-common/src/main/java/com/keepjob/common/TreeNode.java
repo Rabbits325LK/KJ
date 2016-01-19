@@ -1,0 +1,89 @@
+package com.keepjob.common;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * easyui使用的tree模型
+ * 
+ */
+public class TreeNode implements java.io.Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1125053100300079611L;
+	private String id;
+	private String text;// 树节点名称
+	private String iconCls;// 前面的小图标样式
+	private boolean checked = false;// 是否勾选状态
+	private Map<String, Object> attributes;// 其他参数
+	private List<TreeNode> children;// 子节点
+	private String state = "open";// 是否展开(open,closed)
+	private String pid;//父节点
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
+	}
+
+	public List<TreeNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<TreeNode> children) {
+		this.children = children;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getIconCls() {
+		return iconCls;
+	}
+
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+}

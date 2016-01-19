@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keepjob.tysd.store.StoreTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.keepjob.tysd.store.StoreType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="unique_code" property="uniqueCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="search_code" property="searchCode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, unique_code, name, search_code, remark, version, create_date, update_date, creater
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from comm_store_type_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comm_store_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comm_store_type_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" >
+    delete from comm_store_type_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keepjob.tysd.store.StoreType" >
+    insert into comm_store_type_info (id, unique_code, name, 
+      search_code, remark, version, 
+      create_date, update_date, creater
+      )
+    values (#{id,jdbcType=INTEGER}, #{uniqueCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{searchCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{version,jdbcType=CHAR}, 
+      #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, #{creater,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.keepjob.tysd.store.StoreType" >
+    insert into comm_store_type_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uniqueCode != null" >
+        unique_code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="searchCode != null" >
+        search_code,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniqueCode != null" >
+        #{uniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="searchCode != null" >
+        #{searchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keepjob.tysd.store.StoreType" >
+    update comm_store_type_info
+    <set >
+      <if test="uniqueCode != null" >
+        unique_code = #{uniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="searchCode != null" >
+        search_code = #{searchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keepjob.tysd.store.StoreType" >
+    update comm_store_type_info
+    set unique_code = #{uniqueCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      search_code = #{searchCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      version = #{version,jdbcType=CHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      update_date = #{updateDate,jdbcType=DATE},
+      creater = #{creater,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

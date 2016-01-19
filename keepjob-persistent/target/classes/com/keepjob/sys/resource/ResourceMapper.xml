@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keepjob.sys.resource.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.keepjob.sys.resource.Resource" >
+    <id column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+    <result column="is_child" property="isChild" jdbcType="CHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="is_top" property="isTop" jdbcType="CHAR" />
+    <result column="category" property="category" jdbcType="CHAR" />
+    <result column="operate_code" property="operateCode" jdbcType="CHAR" />
+    <result column="index" property="index" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    t.code, t.name, t.parent_code, t.is_child, t.url, t.is_top, t.category, t.operate_code, t.index, t.remark, t.status, t.creator, t.create_date, 
+    t.update_time, t.version,o.style 
+  </sql>
+   <sql id="Base_Column_Resource_List" >
+    code, name,parent_code, is_child, url, is_top, category, operate_code, `index`, remark, status, creator, create_date, 
+    update_time, version
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from comm_resource_info t join comm_operate_info o on t.operate_code=o.code 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_Resource_List" />
+    from comm_resource_info 
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from comm_resource_info
+    where code = #{code,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" >
+    delete from comm_resource_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keepjob.sys.resource.Resource" >
+    insert into comm_resource_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentCode != null" >
+        parent_code,
+      </if>
+      <if test="isChild != null" >
+        is_child,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="operateCode != null" >
+        operate_code,
+      </if>
+      <if test="index != null" >
+        `index`,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isChild != null" >
+        #{isChild,jdbcType=CHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=CHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=CHAR},
+      </if>
+      <if test="operateCode != null" >
+        #{operateCode,jdbcType=CHAR},
+      </if>
+      <if test="index != null" >
+        #{index,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" resultType="java.lang.Integer" >
+    select count(1) from comm_resource_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.keepjob.sys.resource.Resource" >
+    update comm_resource_info
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isChild != null" >
+        is_child = #{isChild,jdbcType=CHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=CHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=CHAR},
+      </if>
+      <if test="operateCode != null" >
+        operate_code = #{operateCode,jdbcType=CHAR},
+      </if>
+      <if test="index != null" >
+        `index` = #{index,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findResourceByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_Resource_List" />
+    from comm_resource_info t
+    where (exists (select 1 from comm_user_role_info a, comm_role_resource_info b
+		where a.role_code = b.role_code and t.code = b.resource_code and a.user_code = #{userCode,jdbcType=VARCHAR})
+		or exists (select 1 from comm_user_info s where s.is_super = '1' and s.unique_code = #{userCode,jdbcType=VARCHAR}))
+		and t.status = '1'
+	order by t.index
+  </select>
+  
+  <select id="findResourceByRoleCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_Resource_List" />
+    from comm_resource_info t
+    where exists(select 1 from comm_role_resource_info b where t.code = b.resource_code and b.role_code = #{roleCode,jdbcType=VARCHAR})
+		and t.status = '1'
+	order by t.index
+  </select>
+</mapper>

@@ -1,0 +1,40 @@
+<configuration>
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder charset="UTF-8">
+      <pattern>%d %5p %c{1}:%L  %m%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <File>log/telemedicine.log</File>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%c][%p] %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>3</maxIndex>
+      <FileNamePattern>log/health-manager.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>2048KB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+  <logger name="com.jsd.rmhs" level="DEBUG"/>
+  <logger name="com.jsd.telemedicine" level="DEBUG"/>
+  <logger name="org.springframework" level="DEBUG"/>
+  <logger name="org.springframework.jdbc" level="DEBUG"/>
+  <logger name="org.springframework.orm" level="DEBUG"/>
+  <logger name="org.springframework.web" level="DEBUG"/>
+  <logger name="org.springframework.transaction" level="DEBUG"/>
+  <logger name="java.sql.ResultSet" level="DEBUG"/>
+  <logger name="java.sql.Connection" level="DEBUG"/>
+  <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+  <logger name="net.sf.ehcache" level="WARN"/>
+  <logger name="com.opensymphony.sitemesh"  level="DEBUG"/>
+  <logger name="com.opensymphony.module.sitemesh"  level="DEBUG"/>
+  <logger name="net.sf.json" level="TRACE"/>
+  <root level="DEBUG">
+    <appender-ref ref="stdout"/>
+    <appender-ref ref="file"/>
+  </root>
+</configuration>

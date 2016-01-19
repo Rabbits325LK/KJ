@@ -1,0 +1,68 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	<global-method-security pre-post-annotations="enabled" />
+	<!-- 启用注解 -->
+	<!-- 该路径下的资源不用过滤 -->
+	<http pattern="/js/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/active/**" security="none" />
+	<http pattern="/swf/**" security="none" />
+	<http pattern="/tools/**" security="none" />
+	<http pattern="/kindeditor/**" security="none"/>
+	<http pattern="/hms/**" security="none"/>
+	<http pattern="/upload/**" security="none"/>
+	<http pattern="/ueditor/**" security="none"/>
+	<http pattern="/api/**" security="none"/>
+	<!-- auto-config=true则使用from-login,如果不使用该属性默认为http-basic,access-denied-page拒绝访问后跳转页面 -->
+	<http use-expressions="true" auto-config="true"  >
+		<!-- 1、登陆页面；2、登陆成功后页面；3、登陆失败页面。always-use-default-target = true表示登录成功后强制跳转 -->
+		<form-login login-page="/login.html" default-target-url="/loginsuccess.html" authentication-failure-url="/login.html?error=1" 
+		login-processing-url="/j_spring_security_check" always-use-default-target="true" 
+		password-parameter="j_password"  username-parameter="j_username" />
+		
+		<!-- 退出成功后到登陆页面，logout后清除session -->
+		<logout logout-success-url="/login.html" invalidate-session="true" />
+		<remember-me />
+		<!-- session 失效后跳转的页面 -->
+		<session-management session-fixation-protection="none">
+			<!-- 最大登陆次数 -->
+			<concurrency-control max-sessions="1" expired-url="/login.html?error=expired" />
+		</session-management>
+		
+		<custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+		<access-denied-handler error-page="/403.jsp"/>
+	</http>
+	<!-- 配置过滤器 -->
+	<beans:bean id="securityFilter" class="com.keepjob.sys.filter.SecurityFilter">
+		<!-- 用户拥有的权限 -->
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<!-- 用户是否拥有所请求资源的权限 -->
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+		<!-- 资源与权限对应关系 -->
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource" />
+	</beans:bean>
+	<!-- 实现了UserDetailsService的Bean -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="securityUserDetailServiceImpl">
+			<password-encoder ref="passwordEncoder">
+				<!-- 用户名做为盐值，以下为加密格式
+					String pwd = "111";
+					String name = "admin";
+					System.out.println(Md5Util.encode(pwd + "{" + name + "}"));
+				 -->
+                <salt-source user-property="username" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+	<!-- 用户的密码加密或解密 -->
+ 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+	<beans:bean id="accessDecisionManager" class="com.keepjob.sys.filter.SecurityAccessDecisionManager"/>
+	<beans:bean id="securityMetadataSource" class="com.keepjob.sys.filter.SecurityMetadataSource"/>
+	<beans:bean id="securityUserDetailServiceImpl" class="com.keepjob.sys.filter.SecurityUserDetailServiceImpl"/>
+</beans:beans>

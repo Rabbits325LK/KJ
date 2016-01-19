@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+	 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+	 http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr.xsd
+	 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd 
+	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="false" default-autowire="byName">
+	<context:annotation-config />
+	<context:property-placeholder location="classpath:META-INF/db/config.properties" />
+	<context:component-scan base-package="com.keepjob.sys.**,com.keepjob.tysd.**,com.keepjob.app.**" />
+
+	<!-- 数据库连接池延迟加载代理 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="defaultAutoCommit" value="false"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://rds0ys3pfq0u0dhi1565r.mysql.rds.aliyuncs.com:3306/r6r81bzb148a696j?autoReconnect=true"></property>
+		<property name="username" value="rabbits"></property>
+		<property name="password" value="lk5115702"></property>
+<!-- 		<property name="driverClassName" value="${driver}"></property> -->
+<!-- 		<property name="url" value="${url}"></property> -->
+<!-- 		<property name="username" value="${user}"></property> -->
+<!-- 		<property name="password" value="${password}"></property> -->
+		<property name="initialSize" value="5"></property>
+		<property name="maxActive" value="20"></property>
+		<property name="maxIdle" value="8"></property>
+		<property name="minIdle" value="5"></property>
+		<property name="removeAbandoned" value="true"></property>
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="validationQuery" value="select version()"></property>
+<!-- 		<property name="validationQuery" value="${validationQuery}"></property> -->
+	</bean>
+	<!-- Mybatis SessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:META-INF/orm/mybatis-configuration.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 基于DataSource的事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 自动装配Mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="annotationClass" value="org.springframework.stereotype.Component" />
+		<property name="basePackage" value="com.keepjob.sys,com.keepjob.tysd,com.keepjob.app" />
+	</bean>
+	
+	<!-- 注解 配置-->
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	
+	<bean class="com.keepjob.common.spring.SpringBeanFactory" />
+	<!-- 基于注解的事务管理 -->
+	<tx:annotation-driven />
+	<task:annotation-driven />
+	
+	
+</beans:beans>

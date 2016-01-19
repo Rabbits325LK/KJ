@@ -1,0 +1,107 @@
+菜谱接口API文档
+请求地址规范：http://域名:端口号/项目名/(扩展前缀名)/方法名.(后缀名）
+本接口：http://localhost:8080/keepjob-web/API/...
+Swift POST GET 请求  http://www.hangge.com/blog/cache/detail_670.html
+
+Carte类 说明：
+    private Integer id;  //序号
+
+    private String uniqueCode; //唯一编码
+
+    private String carteName; //菜谱名字  （新增时必填）
+
+    private String carteLogo; //菜谱图片地址
+
+    private Date createDate; //创建日期
+
+    private Date updateDate; //更新日期
+
+    private String version; //版本号
+
+    private String carteType; //菜谱类型 （新增时必填）
+
+    private String status; //菜谱状态（1:发布，2:暂存)
+
+    private String creater; //创建人（推荐人）
+
+    private String createrCode; //创建人序号
+
+    private String carteSummary; //菜谱简介
+
+    private String carteContent; //菜谱内容
+
+    private String carteTypeName; //菜谱类型名称
+
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+swift里可以创建对应的构造器用与解析：
+struct Carte {
+    var id: Int?
+    var uniqueCode: String?
+    var carteName:String?
+    …
+}
+或者定义类
+class Carte {
+   var id: Int;
+   …
+}
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－  
+1.检索菜谱数据列表
+请求地址：http://localhost:8080/keepjob-web/API/searchCarte.json
+请求方式: GET,POST
+参数：
+carteName 菜单名
+carteType 菜谱类型
+creater  创建人（推荐人)
+createrCode 创建人唯一编码
+uniqueCode 唯一编码
+status 状态
+
+返回：JSON
+------------------------------------------------------------------------------------------------------  
+{"total":2,"rows":[{"id":1,"uniqueCode":"CARTE00000000001","carteName":"123456","carteLogo":"","createDate":"Jan 18, 2016 12:00:00 AM","version":"01","carteType":"01","status":"0","creater":"超级管理员","createrCode":"U000000000000001","carteSummary":"123456789123456789","carteContent":"123456789123456789","carteTypeName":"正餐"},{"id":2,"uniqueCode":"CARTE00000000004","carteName":"起司蛋糕","carteLogo":"/keepjob-web/upload/asd.jpg","createDate":"Jan 18, 2016 12:00:00 AM","version":"01","carteType":"03","status":"0","creater":"超级管理员","createrCode":"U000000000000001","carteSummary":"起司蛋糕，又名芝士蛋糕、干酪蛋糕，是西方甜点的一种。有着柔软的上层，混合了特殊的芝士，再加上糖和其他的配料，如鸡蛋、奶油、椰蓉和水果等。","carteContent":"主料\r\n奶油芝士 (500g) 生鸡蛋 (3个)\r\n辅料\r\n消化饼 (2小包)\r\n厨具\r\n模具锅、打蛋器、电烤箱\r\n分类\r\n烘焙 糕点 甜味 烤 一小时 高级难度\r\n\r\n 1消化饼捣碎加入适量黄油搅匀，放入铝箔模具盒内备用。\r\n 2奶油芝士·鸡蛋蛋黄·100g细沙糖混合搅匀。\r\n 3刚才剩的蛋白加入少许盐，用打蛋器搅成没有蛋白备用。\r\n 4用搅拌好的奶油芝士糊一次加入打好的蛋白，轻轻搅匀。\r\n 5搅好后放入模具盒内，放入烤箱，用水浴法，烤箱中层，上下火，160度，约1个小时。\r\n 6最后祝你吃的开心！","carteTypeName":"烘培"}]}
+
+——————————————————————————————————
+total : 记录条数
+rows : Carte类数组
+
+——————————————————————————————————
+Swfit里
+Class Result {
+ var total : Int;
+ var rows : Array<Carte>;
+}
+
+
+
+
+
+
+
+2.保持菜谱
+请求地址：http://localhost:8080/keepjob-web/API/saveCarte.json
+请求方式: POST
+参数：Carte类
+（id 为空时，视为新增操作。不为空时，视为修改操作）
+返回：JSON
+{“success":true, “message”:”操作成功”}
+{“success”:false, “message”:”失败原因”} 
+——————————————————————————————————
+Swfit里
+Class Result {
+ var success : boolean;
+ var message : String;
+}
+
+
+
+3.发布，暂存，删除
+请求地址： http://localhost:8080/keepjob-web/api/startCarte.json
+请求地址： http://localhost:8080/keepjob-web/api/stopCarte.json 
+请求地址： http://localhost:8080/keepjob-web/api/removeCarte.json 
+请求方式：POST
+请求参数：List<Integer> ids (整数型数组)
+返回：JSON
+{“success":true, “message”:”操作成功”}
+{“success”:false, “message”:”失败原因”}
