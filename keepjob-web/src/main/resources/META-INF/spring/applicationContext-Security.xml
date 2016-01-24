@@ -19,6 +19,8 @@
 	<http pattern="/upload/**" security="none"/>
 	<http pattern="/ueditor/**" security="none"/>
 	<http pattern="/api/**" security="none"/>
+	<http pattern="/home/**" security="none"/> 
+	<http pattern="/fonts/**" security="none"/> 
 	<!-- auto-config=true则使用from-login,如果不使用该属性默认为http-basic,access-denied-page拒绝访问后跳转页面 -->
 	<http use-expressions="true" auto-config="true"  >
 		<!-- 1、登陆页面；2、登陆成功后页面；3、登陆失败页面。always-use-default-target = true表示登录成功后强制跳转 -->

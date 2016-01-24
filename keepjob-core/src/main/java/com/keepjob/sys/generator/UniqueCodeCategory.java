@@ -4,7 +4,8 @@ public enum UniqueCodeCategory {
 	USER_CODE("U"), //用户
 	ROLE_CODE("R"), //角色
 	STORE_CODE("STORE"),//店铺编码
-	CARTE_CODE("CARTE");//菜谱编码
+	CARTE_CODE("CARTE"),//菜谱编码
+	APP_ASSOCIATOR_CODE("AAC");
 	private String value;
 	
 	private UniqueCodeCategory(String value){
