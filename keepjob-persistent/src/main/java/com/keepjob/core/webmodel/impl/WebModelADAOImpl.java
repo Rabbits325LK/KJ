@@ -17,7 +17,7 @@ import com.keepjob.core.webmodel.WebModelADAO;
 import com.keepjob.core.webmodel.WebModelAMapper;
 import com.keepjob.core.webmodel.vo.WebModelAVO;
 
-@Repository("webModelDAO")
+@Repository("webModelADAO")
 public class WebModelADAOImpl implements WebModelADAO {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class WebModelADAOImpl implements WebModelADAO {
 		Criteria criteria = example.createCriteria();
 		PaginationResultSet<WebModelA> result = new PaginationResultSet<WebModelA>();
 		if(StringUtils.isNotEmpty(vo.getCreaterCode())){
-			criteria.andEqualTo("create_code", StringUtils.trimToEmpty(vo.getCreaterCode()));
+			criteria.andEqualTo("creater_code", StringUtils.trimToEmpty(vo.getCreaterCode()));
 		}
 		if(StringUtils.isNotEmpty(vo.getStatus())){
 			criteria.andEqualTo("status", StringUtils.trimToEmpty(vo.getStatus()));

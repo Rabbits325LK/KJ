@@ -55,19 +55,22 @@ public class MembersHandlerImpl implements MembersHandler{
 			if(StringUtils.isBlank(uniqueCode)){
 				throw new ApplicationException("生成用户主键失败,请联系管理员.");
 			}
-			record.setPassword(EncryptUtils.encode(StringUtils.trimToEmpty(record.getPassword())));
+			//record.setPassword(EncryptUtils.encode(StringUtils.trimToEmpty(record.getPassword())));
 			record.setUniqueCode(uniqueCode);
 			record.setStatus(UserStatus.ENABLE.getCode());
 			record.setCreateDate(DateUtils.getCurrentDateTime());
+			if(StringUtils.isNotEmpty(record.getPassword())){
+				record.setPassword(EncryptUtils.encode(StringUtils.trimToEmpty(record.getPassword())));
+			}
 			this.membersDAO.saveMembers(record);
-			logger.info(Logger.saveLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "新增用户信息，信息为["+record.toString()+"]"));
+			logger.info(Logger.saveLogger(user != null ? user.getUniqueCode() : null, user != null ? user.getLastLoginIp() : null, MODULE, "新增用户信息，信息为["+record.toString()+"]"));
 		}else{
 			if(StringUtils.isNotEmpty(record.getPassword())){
 				record.setPassword(EncryptUtils.encode(StringUtils.trimToEmpty(record.getPassword())));
 			}
 			record.setUpdateDate(DateUtils.getCurrentDateTime());
 			this.membersDAO.updateMembers(record);
-			logger.info(Logger.updateLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "修改用户信息，信息为["+record.toString()+"]"));
+			logger.info(Logger.updateLogger(user != null ? user.getUniqueCode() : null, user != null ? user.getLastLoginIp() : null, MODULE, "修改用户信息，信息为["+record.toString()+"]"));
 		}
 		return true;
 	}
@@ -76,7 +79,7 @@ public class MembersHandlerImpl implements MembersHandler{
 	public boolean removeMembers(User user, List<Integer> ids) {
 		// TODO Auto-generated method stub
 		this.membersDAO.deletesMembers(ids);
-		logger.info(Logger.deleteLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "用户删除成功，删除用户编码为["+CollectionUtils.integerToString(ids)+"]"));
+		logger.info(Logger.deleteLogger(user != null ? user.getUniqueCode() : null, user != null ? user.getLastLoginIp() : null, MODULE, "用户删除成功，删除用户编码为["+CollectionUtils.integerToString(ids)+"]"));
 		return true;
 	}
 
@@ -94,7 +97,7 @@ public class MembersHandlerImpl implements MembersHandler{
 				this.membersDAO.updateMembers(record);
 			}
 			
-			logger.info(Logger.startLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "用户启用成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
+			logger.info(Logger.startLogger(user != null ? user.getUniqueCode() : null, user != null ? user.getLastLoginIp() : null, MODULE, "用户启用成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
 		}
 		return true;
 	}
@@ -113,7 +116,7 @@ public class MembersHandlerImpl implements MembersHandler{
 				this.membersDAO.updateMembers(record);
 			}
 			
-			logger.info(Logger.startLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "用户锁定成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
+			logger.info(Logger.startLogger(user != null ? user.getUniqueCode() : null, user != null ? user.getLastLoginIp() : null, MODULE, "用户锁定成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
 		}
 		return true;
 	}

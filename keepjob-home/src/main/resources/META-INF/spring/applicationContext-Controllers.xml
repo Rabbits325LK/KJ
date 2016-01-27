@@ -52,7 +52,7 @@
 	<resources mapping="/active/**" location="/WEB-INF/active/" />
 	<resources mapping="/kindeditor/**" location="/kindeditor/"/>
 	<resources mapping="/ueditor/**" location="/ueditor/"/>
-	<resources mapping="/upload/**" location="/upload/"/>
+	<resources mapping="/memberUpload/**" location="/memberUpload/"/>
 	<!-- Configures Handler Interceptors -->	
 	<mvc:interceptors>
 		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->

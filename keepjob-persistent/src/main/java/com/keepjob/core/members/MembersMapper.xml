@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.keepjob.app.members.MembersMapper" >
+<mapper namespace="com.keepjob.core.members.MembersMapper" >
   <resultMap id="BaseResultMap" type="com.keepjob.core.members.Members" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="unique_code" property="uniqueCode" jdbcType="VARCHAR" />

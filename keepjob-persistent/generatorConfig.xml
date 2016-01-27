@@ -31,7 +31,7 @@
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<!-- 要生成哪些表-->
-		<table tableName="keepjob_web_model_a" domainObjectName="WebModelA" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+		<table tableName="keepjob_model_info" domainObjectName="Model" enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
 		
 	</context>
 </generatorConfiguration>

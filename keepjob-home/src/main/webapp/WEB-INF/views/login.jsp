@@ -24,7 +24,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<font color="#CCCCCC" size="120"><span
+					<font color="#FF6633" size="120"><span
 						class="glyphicon glyphicon-lock" aria-hidden="true"></span>LOGIN</font>
 				</div>
 				<div class="modal-body">
@@ -43,7 +43,8 @@
 								type="password" class="form-control" placeholder="密码"
 								name="password" aria-describedby="basic-addon1">
 						</div>
-					</form>
+					</form><br>
+					<div id="ErrorMsgLoginDiv"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -59,9 +60,10 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<font color="#CCCCCC" size="120"><span
+					<font color="#9966FF" size="120"><span
 						class="glyphicon glyphicon-paste" aria-hidden="true"></span>REGISTER</font>
 				</div>
+				<div class="modal-body">
 					<form id="registerForm" method="post">
 						<div class="input-group" id="RE">
 							<span class="input-group-addon" id="basic-addon1"><span
@@ -73,14 +75,14 @@
 						<div class="input-group" id="RP">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-phone" aria-hidden="true"></span></span> <input
-								type="text" class="form-control" placeholder="手机" id="phone"
+								type="text" class="form-control" placeholder="手机" id="phone" onblur="checkPhone();"
 								name="phone" aria-describedby="basic-addon1">
 						</div>
 						<br>
 						<div class="input-group" id="RPW">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-lock" aria-hidden="true"></span></span> <input
-								type="password" class="form-control" placeholder="密码"
+								type="password" class="form-control" placeholder="密码" onblur="checkPassword();"
 								name="password" id="password" aria-describedby="basic-addon1">
 						</div>
 						<br>
@@ -88,7 +90,7 @@
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-lock" aria-hidden="true"></span></span> <input
 								type="password" class="form-control" placeholder="密码"
-								name="rpassword" id="rpassword" aria-describedby="basic-addon1">
+								name="rpassword" id="rpassword" aria-describedby="basic-addon1" onblur="checkPassword();">
 						</div>
 						<br>
 						<div class="input-group">
@@ -115,20 +117,48 @@
 								<option value="9">其他</option>
 							</select>
 						</div>
-					</form>
-					<div class="alert alert-warning">
-						<a href="#" class="close" data-dismiss="alert"> &times; </a> <strong>警告！</strong>您的网络连接有问题。
-					</div>
+					</form><br>
+					<div id="ErrorMsgRegisterDiv"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="registerSubmit">注册</button>
+					<button type="button" class="btn btn-primary" id="registerSubmit" disabled>注册</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- MsgModel -->
+	<div class="modal fade" id="MsgModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLable">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<font color="#33FFCC" size="120"><span
+						class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>SUCCESS</font>
+				</div>
+				<div class="modal-body">
+					注册成功!
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>	
 </body>
 <script type="text/javascript">
+    var emailFlag = false;
+    var phoneFlag = false;
+    var passwordFlag = false;
+    
+    function changeButton(){
+    		if(emailFlag == true && phoneFlag == true && passwordFlag == true){
+    			$('#registerSubmit').removeAttr("disabled");
+    		}else{
+    			$('#registerSubmit').attr("disabled","disabled");
+    		}
+    }
 	$(function() {
 
 		/*登录
@@ -142,15 +172,17 @@
 								dataType : 'json',
 								data : $("#loginForm").serialize(),
 								success : function(data) {
-									alert(data);
+									//alert(data.success);
 									if (data.success) {
 										console.info(data.success);
 										window.location.href = "${pageContenxt.request.contextPath}/keepjob-home/user/index.html";
+									}else{
+										console.info(data.message);
+										LogoinTreatmentResult(data.message);
 									}
 								}
 							};
 							$.ajax(options);
-							//$('#LoginModal').modal('hide');
 						})
 
 		/*注册
@@ -164,8 +196,10 @@
 				success : function(data) {
 
 					if (data.success) {
-						alert(data.success);
+						//alert(data.success);
 						$('#RegisterModal').modal('hide');
+						$('#MsgModal').modal('show');
+						console.info("MsgModal->Show");
 					} else {
 						alert(data.messge);
 					}
@@ -182,6 +216,7 @@
 		if(email == '' || email == null){
 			$('#RE').removeClass();
 			$('#RE').addClass("input-group has-warning has-feedback");
+			emailFlag = false;
 		}else{
 			$.ajax({
 				url : '${pageContext.request.contextPath}/main/checkEmail.json',
@@ -192,9 +227,12 @@
 					if(data.success){
 						$('#RE').removeClass();
 						$('#RE').addClass("input-group has-success has-feedback");
+						emailFlag = true;
+						changeButton();
 					}else{
 						$('#RE').removeClass();
 						$('#RE').addClass("input-group has-error has-feedback");
+						emailFlag = false;
 					}
 				}
 			});
@@ -208,6 +246,7 @@
 		if(phone == '' || phone == null){
 			$('#RP').removeClass();
 			$('#RP').addClass("input-group has-warning has-feedback");
+			phoneFlag = false;
 		}else{
 			$.ajax({
 				url : '${pageContext.request.contextPath}/main/checkPhone.json',
@@ -218,31 +257,58 @@
 					if(data.success){
 						$('#RP').removeClass();
 						$('#RP').addClass("input-group has-success has-feedback");
+						phoneFlag = true;
+						changeButton();
 					}else{
 						$('#RP').removeClass();
 						$('#RP').addClass("input-group has-error has-feedback");
+						phoneFlag = false;
 					}
 				}
 			});
 		}
 	}
 	
-	/*验证手机号码
+	/*验证密码是否一致
 	--------------------------------------------------------*/
 	function checkPassword(){
 		var password = $('#password').val();
-		var rpassword = $('#password').val();
-		if(password.equeal(rpassword)){
+		var rpassword = $('#rpassword').val();
+		if(6 > password.length ){
+			console.info(password.length);
 			$('#RPW').removeClass();
-			$('#RRPW').removeClass();
-			$('#RPW').addClass("input-group has-success has-feedback");
-			$('#RRPW').addClass("input-group has-success has-feedback");
+			$('#RPW').addClass("input-group has-warning has-feedback");
+			passwordFlag = false;
 		}else{
-			$('#RPW').removeClass();
-			$('#RRPW').removeClass();
-			$('#RPW').addClass("input-group has-error has-feedback");
-			$('#RRPW').addClass("input-group has-error has-feedback");
+			if(password == rpassword){
+				$('#RPW').removeClass();
+				$('#RRPW').removeClass();
+				$('#RPW').addClass("input-group has-success has-feedback");
+				$('#RRPW').addClass("input-group has-success has-feedback");
+				passwordFlag = true;
+				changeButton();
+			}else{
+				$('#RPW').removeClass();
+				$('#RRPW').removeClass();
+				$('#RPW').addClass("input-group has-error has-feedback");
+				$('#RRPW').addClass("input-group has-error has-feedback");
+				passwordFlag = false;
+			}
 		}
+	}
+	
+	function LogoinTreatmentResult(str){
+		$('#ErrorMsgLoginDiv').html("<div class='alert alert-danger' role='alert' id='ErrorAlert'>"+str+"</div>");
+		//setInterval("HideErrorAlert()",2000);
+	}
+	
+	function RegisterTreatmentResult(str){
+		$('#ErrorMsgRegisterDiv').html("<div class='alert alert-danger' role='alert' id='ErrorAlert'>"+str+"</div>");
+		//setInterval("HideErrorAlert()",2000);
+	}
+	
+	function HideErrorAlert(){
+		$('#ErrorAlert').alert('close');
 	}
 </script>
 </html>

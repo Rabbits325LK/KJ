@@ -2,8 +2,11 @@ package com.keepjob.core.webmodel;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.keepjob.common.mybatis.MyBatisCriteria;
 
+@Component("webModelA")
 public interface WebModelAMapper {
     int countByExample(MyBatisCriteria example);
 
