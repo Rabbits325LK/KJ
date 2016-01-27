@@ -16,7 +16,7 @@
 	default-lazy-init="false" default-autowire="byName">
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:META-INF/db/config.properties" />
-	<context:component-scan base-package="com.keepjob.sys.**,com.keepjob.tysd.**,com.keepjob.app.**" />
+	<context:component-scan base-package="com.keepjob.sys.**,com.keepjob.tysd.**,com.keepjob.app.**,com.keepjob.core.**" />
 
 	<!-- 数据库连接池延迟加载代理 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -52,7 +52,7 @@
 	<!-- 自动装配Mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Component" />
-		<property name="basePackage" value="com.keepjob.sys,com.keepjob.tysd,com.keepjob.app" />
+		<property name="basePackage" value="com.keepjob.sys,com.keepjob.tysd,com.keepjob.app,com.keepjob.core" />
 	</bean>
 	
 	<!-- 注解 配置-->

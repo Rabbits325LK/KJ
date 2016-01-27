@@ -584,5 +584,6 @@
 		<module>keepjob-core</module>
 		<module>keepjob-persistent</module>
 		<module>keepjob-web</module>
+		<module>keepjob-home</module>
 	</modules>
 </project>
