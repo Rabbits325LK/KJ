@@ -119,10 +119,8 @@ public class MembersHandlerImpl implements MembersHandler{
 				
 				this.membersDAO.updateMembers(record);
 			}
-			System.out.println("1");
 			logger.info(Logger.startLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "用户锁定成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
 		}
-		System.out.println("2");
 		return true;
 	}
 
