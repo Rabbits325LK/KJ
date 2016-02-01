@@ -25,7 +25,7 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<build>
-		<finalName>keepjob-common</finalName>
+		<finalName>keepjob-core</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
