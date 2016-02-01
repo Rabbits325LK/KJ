@@ -33,7 +33,7 @@
 					url="/core/members/lockMembers.json"
 					options="plain:true,iconCls:'key'" />
 				<common:button name="删除" id="deleteUser"
-					url="/core/members/deleteMembers.json"
+					url="/core/members/removeMembers.json"
 					options="plain:true,iconCls:'cancel'" />
 			</common:toolbar>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -157,7 +157,7 @@
 									{
 										field : 'phone',
 										title : '联系电话',
-										width : 80,
+										width : 150,
 										align : 'left'
 									},
 									{
@@ -187,15 +187,15 @@
 										align : 'center',
 										formatter : function(value, row, index) {
 											if (value == '0') {
-												return '停用';
+												return '<font color="#66CCFF">停用</font>';
 											} else if (value == '1') {
-												return '正常';
+												return '<font color="#33FF00">正常</font>';
 											} else if (value == '2') {
-												return '锁定';
+												return '<font color="#FF9900">锁定</font>';
 											} else if (value == '9') {
-												return '删除';
+												return '<font color="#CC0000">删除</font>';
 											} else {
-												return '未知';
+												return '<font color="#999999">未知</font>';
 											}
 										}
 									},
@@ -210,7 +210,7 @@
 													+ '\\\');"  title="编辑" icon="${pageContext.request.contextPath}/images/extjs_icons/pencil.png"/>'
 													+ '&nbsp;'
 													+ '&nbsp;'
-													+ '<common:link id="deleteRow" url="/core/members/deleteMembers.json" click="deleteRecordRow(\\\''
+													+ '<common:link id="deleteRow" url="/core/members/removeMembers.json" click="deleteRecordRow(\\\''
 													+ row.id
 													+ '\\\');" title="删除" icon="${pageContext.request.contextPath}/images/extjs_icons/cancel.png"/>';
 										}
@@ -274,7 +274,7 @@
 									.modalDialog({
 										title : '添加用户',
 										width : 600,
-										height : 660,
+										height : 510,
 										href : '${pageContext.request.contextPath}/core/members/addMembers.html',
 										buttons : [
 												{
@@ -323,17 +323,17 @@
 				.click(
 						function() {
 							var codes = '';
+							var codes = new Array();
 							var selections = $('#dataGrid').datagrid(
 									'getSelections');
-							var prex = '';
 							if (null != selections && selections != ''
 									&& selections != undefined) {
 								for (var i = 0; i < selections.length; i++) {
-									codes = codes + prex + selections[i].id;
-									prex = ",";
+									codes.push(selections[i].id);
 								}
 							}
-							if (codes == null || codes.length == 0) {
+							if (codes == null || codes == ''
+									|| codes.length == 0) {
 								parent.$.messager.alert('提示', '请选择要启用的用户记录行',
 										'info');
 								return false;
@@ -353,7 +353,7 @@
 															.post(
 																	'${pageContext.request.contextPath}/core/members/startMembers.json',
 																	{
-																		ids : codes
+																		id : codes
 																				.join(',')
 																	},
 																	function(
@@ -414,7 +414,7 @@
 															.post(
 																	'${pageContext.request.contextPath}/core/members/lockMembers.json',
 																	{
-																		ids : codes
+																		id : codes
 																				.join(',')
 																	},
 																	function(
@@ -448,7 +448,7 @@
 				.modalDialog({
 					title : '编辑用户',
 					width : 600,
-					height : 600,
+					height : 400,
 					href : '${pageContext.request.contextPath}/core/members/editMembers.html?id='
 							+ code,
 					buttons : [ {
@@ -488,7 +488,7 @@
 										.post(
 												'${pageContext.request.contextPath}/core/members/removeMembers.json',
 												{
-													ids : ids.join(',')
+													id : ids.join(',')
 												},
 												function(result) {
 													parent.$.messager

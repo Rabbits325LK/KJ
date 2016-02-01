@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.keepjob.common.exception.ApplicationException;
 import com.keepjob.common.pagination.PaginationResultSet;
@@ -37,10 +38,12 @@ public class MembersHandlerImpl implements MembersHandler{
 	public Members getMembers(String queryType, String searchCode, Integer id) {
 		// TODO Auto-generated method stub
 		Members record = null;
-		if(queryType.equals("email")){
-			record = this.membersDAO.getMembersByEmail(StringUtils.trim(searchCode));
-		}else if(queryType.equals("phone")){
-			record = this.membersDAO.getMembersByPhone(StringUtils.trim(searchCode));
+		if(StringUtils.isNotEmpty(queryType)){
+			if(queryType.equals("email")){
+				record = this.membersDAO.getMembersByEmail(StringUtils.trim(searchCode));
+			}else if(queryType.equals("phone")){
+				record = this.membersDAO.getMembersByPhone(StringUtils.trim(searchCode));
+			}
 		}else{
 			record = this.membersDAO.getMembers(id);
 		}
@@ -48,6 +51,7 @@ public class MembersHandlerImpl implements MembersHandler{
 	}
 
 	@Override
+	@Transactional
 	public boolean saveOrUpdate(User user, Members record) {
 		// TODO Auto-generated method stub
 		if(NumberUtils.isEmpty(record.getId())){
@@ -73,6 +77,7 @@ public class MembersHandlerImpl implements MembersHandler{
 	}
 
 	@Override
+	@Transactional
 	public boolean removeMembers(User user, List<Integer> ids) {
 		// TODO Auto-generated method stub
 		this.membersDAO.deletesMembers(ids);
@@ -81,6 +86,7 @@ public class MembersHandlerImpl implements MembersHandler{
 	}
 
 	@Override
+	@Transactional
 	public boolean startMembers(User user, List<Integer> ids) {
 		// TODO Auto-generated method stub
 		Members record = null;
@@ -100,6 +106,7 @@ public class MembersHandlerImpl implements MembersHandler{
 	}
 
 	@Override
+	@Transactional
 	public boolean lockMembers(User user, List<Integer> ids) {
 		// TODO Auto-generated method stub
 		Members record = null;
@@ -112,9 +119,10 @@ public class MembersHandlerImpl implements MembersHandler{
 				
 				this.membersDAO.updateMembers(record);
 			}
-			
+			System.out.println("1");
 			logger.info(Logger.startLogger(user.getUniqueCode(), user.getLastLoginIp(), MODULE, "用户锁定成功，启用用户编码为["+CollectionUtils.integerToString(ids)+"]"));
 		}
+		System.out.println("2");
 		return true;
 	}
 

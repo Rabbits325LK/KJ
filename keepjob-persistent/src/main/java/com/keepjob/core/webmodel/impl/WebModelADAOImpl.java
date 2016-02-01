@@ -17,7 +17,7 @@ import com.keepjob.core.webmodel.WebModelADAO;
 import com.keepjob.core.webmodel.WebModelAMapper;
 import com.keepjob.core.webmodel.vo.WebModelAVO;
 
-@Repository("webModelDAO")
+@Repository("webModelADAO")
 public class WebModelADAOImpl implements WebModelADAO {
 
 	@Autowired

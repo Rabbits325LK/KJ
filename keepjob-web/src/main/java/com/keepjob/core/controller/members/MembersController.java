@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +46,9 @@ public class MembersController {
 	
 	//	进入编辑页面
 	@RequestMapping(value = "/editMembers.html", method = RequestMethod.GET)
-	public String toEditMembersView(HttpSession session, HttpServletRequest request){
+	public String toEditMembersView(HttpSession session, HttpServletRequest request,
+			@ModelAttribute("parameter")Members parameter){
+		request.setAttribute("result", parameter);
 		return "core/members/membersEdit";
 	}
 	
@@ -182,5 +186,16 @@ public class MembersController {
 			e.printStackTrace();
 			return gson.toJson(JSONMessage.createFailedMessage(e.getMessage()));
 		}
+	}
+	
+	@ModelAttribute("parameter")
+	private Members getParameter(@RequestParam(value = "id", required = false) Integer id, Model model){
+		Members parameter = null;
+		if(null == id){
+			parameter = new Members();
+		}else{
+			parameter = this.membersHandler.getMembers(null, null, id);
+		}
+		return parameter;
 	}
 }

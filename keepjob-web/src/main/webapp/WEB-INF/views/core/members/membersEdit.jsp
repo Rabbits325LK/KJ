@@ -39,7 +39,7 @@
 						<td><input id="email" name="email" type="text" placeholder="请输入Email地址" class="easyui-validatebox span4"  value="${result.email }" data-options="validType:'email'" onblur="javascript:checkEmail();">
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td style="text-align:right;">登录密码<font color="#FF0000">*</font>:</td>
 						<td><input id="password" name="password" type="password" placeholder="请输入登录密码" class="easyui-validatebox span4" data-options="required:true, validType:'length[6,16]'">
 						</td>
@@ -48,7 +48,7 @@
 						<td style="text-align:right;">确认密码<font color="#FF0000">*</font>:</td>
 						<td><input id="rpassword" name="rpassword" type="password" placeholder="请输入确认密码" class="easyui-validatebox span4" data-options="required:true, validType:'length[6,16]'">
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td colspan="2" style="text-align:center;"><font id="errorMsg" style="color: red;">&nbsp;</font></td>
 					</tr>
@@ -142,7 +142,7 @@
 						text : '数据处理中，请稍后....'
 					});
 					var isValid = $(this).form('validate');
-					if (isValid) {
+					/* if (isValid) {
 						if($('#password').val() != $('#rpassword').val()){
 							$.messager.alert('提示','确认密码与登录密码不一致.','info');
 							return false;
@@ -156,7 +156,7 @@
 						}
 					}else{
 						parent.$.messager.progress('close');
-					}
+					} */
 					return isValid;
 				}else{
 					$('#errorMsg').html('请选择用户对应角色信息.');
