@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.keepjob.common.Constant;
 import com.keepjob.core.members.Members;
 import com.keepjob.sys.logger.LoggerDecorator;
 
@@ -36,7 +37,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 		String contextPath = request.getContextPath();
 		//String url = request.getServletPath().toString();
 		HttpSession session = request.getSession();
-		Members record = (Members) session.getAttribute("members");
+		Members record = (Members) session.getAttribute(Constant.MEMBERS_KEY);
 		if (null == record) {
 			log.info("=================FALID===============");
 			response.sendRedirect(contextPath + "/main/login.html");

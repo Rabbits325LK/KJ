@@ -2,8 +2,13 @@ package com.keepjob.core.members;
 
 import java.util.Date;
 
-public class Members {
-    private Integer id;
+public class Members implements java.io.Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -707257272226644934L;
+
+	private Integer id;
 
     private String uniqueCode;
 

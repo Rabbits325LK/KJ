@@ -21,14 +21,14 @@
 	<div class="easyui-panel" style="width: 100%;">
 		<div id="gardToolBar">
 			<common:toolbar id="toolBar">
-				<common:button name="暂存" id="start"
-					url="/core/members/startMembers.json"
+				<common:button name="暂存" id="temeporary"
+					url="/core/webtemplate/temeporaryWebTemplates.json"
 					options="plain:true,iconCls:'tick'" />
-				<common:button name="下线" id="lock"
-					url="/core/members/lockMembers.json"
+				<common:button name="下线" id="private"
+					url="/core/webtemplate/privateWebTemplates.json"
 					options="plain:true,iconCls:'key'" />
-				<common:button name="发布" id="deleteUser"
-					url="/core/members/deleteMembers.json"
+				<common:button name="发布" id="release"
+					url="/core/webtemplate/releaseWebTemplates.json"
 					options="plain:true,iconCls:'cancel'" />
 			</common:toolbar>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -76,7 +76,7 @@
 		dataGrid = $('#dataGrid')
 				.datagrid(
 						{
-							url : '<c:url value="/core/members/searchMembers.json"/>',
+							url : '<c:url value="/core/webtemplate/searchWebTemplate.json"/>',
 							loadMsg : '正在查询系统用户信息,请稍候....',
 							nowrap : false,
 							fit : true,
@@ -139,23 +139,23 @@
 												return '未知';
 											}
 										}
-									},
+									}/* ,
 									{
 										field : 'action',
 										title : '操作',
 										width : 100,
 										align : 'center',
 										formatter : function(value, row, index) {
-											return '<common:link id="editRow" url="/core/members/editMembers.html" click="editRecordRow(\\\''
+											return '<common:link id="editRow" url="/core/webtemplate/editMembers.html" click="editRecordRow(\\\''
 													+ row.id
 													+ '\\\');"  title="编辑" icon="${pageContext.request.contextPath}/images/extjs_icons/pencil.png"/>'
 													+ '&nbsp;'
 													+ '&nbsp;'
-													+ '<common:link id="deleteRow" url="/core/members/deleteMembers.json" click="deleteRecordRow(\\\''
+													+ '<common:link id="deleteRow" url="/core/webtemplate/deleteMembers.json" click="deleteRecordRow(\\\''
 													+ row.id
 													+ '\\\');" title="删除" icon="${pageContext.request.contextPath}/images/extjs_icons/cancel.png"/>';
 										}
-									} ] ],
+									} */ ] ],
 							headerContextMenu : [
 									{
 										text : "冻结该列",
@@ -209,7 +209,7 @@
 
 
 		//启用
-		$('#start')
+		$('#temeporary')
 				.click(
 						function() {
 							var codes = '';
@@ -224,14 +224,14 @@
 								}
 							}
 							if (codes == null || codes.length == 0) {
-								parent.$.messager.alert('提示', '请选择要启用的用户记录行',
+								parent.$.messager.alert('提示', '请选择要暂存的模板记录行',
 										'info');
 								return false;
 							}
 							parent.$.messager
 									.confirm(
 											'询问',
-											'您是否要启用当前所选用户?',
+											'您是否要暂存当前所选模板?',
 											function(b) {
 												if (b) {
 													parent.$.messager
@@ -241,7 +241,7 @@
 															});
 													$
 															.post(
-																	'${pageContext.request.contextPath}/core/members/startMembers.json',
+																	'${pageContext.request.contextPath}/core/webtemplate/temeporaryWebTemplates.json',
 																	{
 																		ids : codes
 																				.join(',')
@@ -254,7 +254,7 @@
 																			parent.$.messager
 																					.alert(
 																							'提示',
-																							'所选用户启用操作成功,请确认.',
+																							'所选模板暂存操作成功,请确认.',
 																							'info');
 																			dataGrid
 																					.datagrid('reload');
@@ -271,7 +271,7 @@
 						});
 
 		//锁定
-		$('#lock')
+		$('#private')
 				.click(
 						function() {
 							var codes = new Array();
@@ -285,14 +285,14 @@
 							}
 							if (codes == null || codes == ''
 									|| codes.length == 0) {
-								parent.$.messager.alert('提示', '请选择要停用的用户记录行',
+								parent.$.messager.alert('提示', '请选择要私有的模板记录行',
 										'info');
 								return false;
 							}
 							parent.$.messager
 									.confirm(
 											'询问',
-											'您是否要锁定当前所选用户?',
+											'您是否要私有当前所选模板?',
 											function(b) {
 												if (b) {
 													parent.$.messager
@@ -302,7 +302,7 @@
 															});
 													$
 															.post(
-																	'${pageContext.request.contextPath}/core/members/lockMembers.json',
+																	'${pageContext.request.contextPath}/core/webtemplate/privateWebTemplates.json',
 																	{
 																		ids : codes
 																				.join(',')
@@ -315,7 +315,7 @@
 																			parent.$.messager
 																					.alert(
 																							'提示',
-																							'所选用户锁定操作成功,请确认.',
+																							'所选模板私有操作成功,请确认.',
 																							'info');
 																			dataGrid
 																					.datagrid('reload');
@@ -330,6 +330,66 @@
 												}
 											});
 						});
+		//发布
+		$('#release').click(
+			function() {
+				var codes = new Array();
+				var selections = $('#dataGrid').datagrid(
+						'getSelections');
+				if (null != selections && selections != ''
+						&& selections != undefined) {
+					for (var i = 0; i < selections.length; i++) {
+						codes.push(selections[i].id);
+					}
+				}
+				if (codes == null || codes == ''
+						|| codes.length == 0) {
+					parent.$.messager.alert('提示', '请选择要发布的模板记录行',
+							'info');
+					return false;
+				}
+				parent.$.messager
+				.confirm(
+						'询问',
+						'您是否要发布当前所选模板?',
+						function(b) {
+							if (b) {
+								parent.$.messager
+										.progress({
+											title : '提示',
+											text : '数据处理中，请稍后....'
+										});
+								$
+										.post(
+												'${pageContext.request.contextPath}/core/webtemplate/releaseWebTemplates.json',
+												{
+													ids : codes
+															.join(',')
+												},
+												function(
+														result) {
+													parent.$.messager
+															.progress('close');
+													if (result.success) {
+														parent.$.messager
+																.alert(
+																		'提示',
+																		'所选模板发布操作成功,请确认.',
+																		'info');
+														dataGrid
+																.datagrid('reload');
+													} else {
+														$.messager
+																.alert(
+																		'错误',
+																		result.message,
+																		'error');
+													}
+												}, 'JSON');
+							}
+						});
+			}		
+		);
 
 	})
 </script>

@@ -15,6 +15,8 @@ public final class Constant {
 	
 	public static final String USER_KEY="currentuser";
 	
+	public static final String MEMBERS_KEY="currentmembers";
+	
 	public static final String BR="\n";
 	
 	public static final String GBK ="GBK";

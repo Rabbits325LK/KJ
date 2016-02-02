@@ -59,7 +59,7 @@ public class MembersDAOImpl implements MembersDAO{
 		MyBatisCriteria example = new MyBatisCriteria();
 		try {
 			if(StringUtils.isNotEmpty(email)){
-				example.createCriteria().andEqualTo("phone", StringUtils.trim(email));
+				example.createCriteria().andEqualTo("email", StringUtils.trim(email));
 				return this.membersMapper.selectByExample(example).get(0);
 			}else{
 				throw new ApplicationException("邮箱地址为空");
