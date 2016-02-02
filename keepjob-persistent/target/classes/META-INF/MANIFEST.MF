@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Built-By: lk
+Class-Path: javax.inject-1.jar jstl-1.2.jar standard-1.1.2.jar spring-
+ context-4.1.4.RELEASE.jar spring-beans-4.1.4.RELEASE.jar spring-core-
+ 4.1.4.RELEASE.jar spring-expression-4.1.4.RELEASE.jar spring-tx-4.1.4
+ .RELEASE.jar spring-jdbc-4.1.4.RELEASE.jar spring-orm-4.1.4.RELEASE.j
+ ar spring-aop-4.1.4.RELEASE.jar aopalliance-1.0.jar spring-web-4.1.4.
+ RELEASE.jar spring-webmvc-4.1.4.RELEASE.jar dom4j-1.6.1.jar xml-apis-
+ 1.0.b2.jar jaxen-1.1.1.jar jdom-1.0.jar xercesImpl-2.6.2.jar xom-1.0.
+ jar xmlParserAPIs-2.6.2.jar xalan-2.6.0.jar icu4j-2.6.1.jar slf4j-api
+ -1.7.7.jar jcl-over-slf4j-1.7.7.jar logback-core-1.1.2.jar logback-cl
+ assic-1.1.2.jar mysql-connector-java-5.1.34.jar cglib-nodep-2.2.2.jar
+  ehcache-core-2.6.9.jar mybatis-3.2.5.jar mybatis-spring-1.2.2.jar my
+ batis-ehcache-1.0.0.jar poi-3.10-FINAL.jar freemarker-2.3.19.jar comm
+ ons-codec-1.9.jar commons-dbcp-1.4.jar commons-pool-1.5.4.jar commons
+ -fileupload-1.3.1.jar commons-io-2.2.jar jackson-core-asl-1.9.13.jar 
+ jackson-mapper-asl-1.9.13.jar json-lib-2.4-jdk15.jar commons-beanutil
+ s-1.8.0.jar commons-collections-3.2.1.jar commons-lang-2.5.jar common
+ s-logging-1.1.1.jar ezmorph-1.0.6.jar keepjob-common-1.0.0-SNAPSHOT.j
+ ar jodconverter-maven-plugin-2.2.1.jar maven-plugin-api-2.0.jar plexu
+ s-utils-1.1.jar jodconverter-2.2.1.jar juh-2.3.0.jar jurt-2.3.0.jar r
+ idl-2.3.0.jar unoil-2.3.0.jar slf4j-jdk14-1.4.3.jar commons-net-3.3.j
+ ar pinyin4j-2.5.0.jar keepjob-core-1.0.0-SNAPSHOT.jar itext-2.0.8.jar
+  bcmail-jdk14-138.jar bcprov-jdk14-138.jar core-renderer-R8pre2.jar j
+ tidy-4aug2000r7-dev.jar barcode4j-light-2.0.jar avalon-framework-impl
+ -4.2.0.jar
+Build-Jdk: 1.8.0_40
+Created-By: Maven Integration for Eclipse
+
