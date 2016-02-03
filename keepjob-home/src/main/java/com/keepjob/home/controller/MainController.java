@@ -141,4 +141,9 @@ public class MainController {
 	public String toUploadTestView(HttpSession session, HttpServletRequest request){
 		return "uploadTest";
 	}
+	
+	@RequestMapping(value = "/webTemplate.html", method = RequestMethod.GET)
+	public String toTemplateAddView(HttpSession session, HttpServletRequest request){
+		return "webtemplate/templateAdd";
+	}
 }

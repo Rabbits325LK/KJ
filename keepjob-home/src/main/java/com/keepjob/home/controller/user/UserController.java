@@ -46,7 +46,7 @@ public class UserController {
 	
 	@RequestMapping( value = "/showModel.html", method = RequestMethod.GET)
 	public String showModelAView(HttpSession session, HttpServletRequest request){
-		return "model/a/modelView";
+		return "webtemplate/webTemplateView";
 	}
 	
 	@RequestMapping (value = "/toModel.html", method = RequestMethod.GET)
@@ -54,12 +54,12 @@ public class UserController {
 			@RequestParam(value = "id", required = true) Integer id){
 		WebTemplate webTemplate = this.webTemplateHandler.getWebTemplate(id);
 		model.addAttribute("result", webTemplate);
-		return "model/a/model";
+		return "webtemplate/webTemplateView";
 	}
 	
 	@RequestMapping(value = "/toAddModel.html", method = RequestMethod.GET)
 	public String toAddModel(HttpSession session, HttpServletRequest request){
-		return "model/a/modelAdd";
+		return "webtemplate/webTemplateAdd";
 	}
 	
 	@RequestMapping(value = "addModel.json", method = RequestMethod.POST, produces = Constant.APPLICATION_JSON)
