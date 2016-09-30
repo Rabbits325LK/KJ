@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KJ.iml" filepath="$PROJECT_DIR$/KJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepjob-common/keepjob-common.iml" filepath="$PROJECT_DIR$/keepjob-common/keepjob-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepjob-core/keepjob-core.iml" filepath="$PROJECT_DIR$/keepjob-core/keepjob-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepjob-home/keepjob-home.iml" filepath="$PROJECT_DIR$/keepjob-home/keepjob-home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepjob-persistent/keepjob-persistent.iml" filepath="$PROJECT_DIR$/keepjob-persistent/keepjob-persistent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepjob-web/keepjob-web.iml" filepath="$PROJECT_DIR$/keepjob-web/keepjob-web.iml" />
+    </modules>
+  </component>
+</project>

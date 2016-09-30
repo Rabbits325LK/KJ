@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<distributionManagement>
+	<!-- <distributionManagement>
 		<repository>
 			<id>releases</id>
 			<name>Releases</name>
@@ -23,7 +23,7 @@
 			<id>snapshots</id>
 			<url>http://${rep.ip}/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
-	</distributionManagement>
+	</distributionManagement> -->
 	<build>
 		<finalName>keepjob-home</finalName>
 		<resources>
@@ -145,14 +145,14 @@
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>yuicompressor-maven-plugin</artifactId>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<phase>compile</phase>
 						<goals>
 							<goal>compress</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 				<configuration>
 					<encoding>UTF-8</encoding>
 					<jswarn>false</jswarn>
@@ -211,7 +211,10 @@
 		</plugins>
 	</reporting>
 	<dependencies>
-	
+		<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpmime</artifactId>
+</dependency>
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
@@ -423,6 +426,11 @@
 			<artifactId>json-lib</artifactId>
 			<classifier>jdk15</classifier>
 		</dependency>
+		<dependency>
+    				<groupId>org.apache.httpcomponents</groupId>
+    				<artifactId>fluent-hc</artifactId>
+    				<version>4.3.6</version>
+			</dependency>
 		<dependency>
 			<groupId>com.google.code.kaptcha</groupId>
 			<artifactId>kaptcha</artifactId>
