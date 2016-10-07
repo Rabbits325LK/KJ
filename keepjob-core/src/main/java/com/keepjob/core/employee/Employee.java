@@ -2,6 +2,11 @@ package com.keepjob.core.employee;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.keepjob.common.util.DateUtils;
+import com.keepjob.common.util.UUIDGenerator;
+
 public class Employee {
     private String code;
 
@@ -121,5 +126,17 @@ public class Employee {
 
     public void setCategory(String category) {
         this.category = category == null ? null : category.trim();
+    }
+    
+    /**
+     * 绑定微信ID
+     * @param weChatId
+     */
+    public void bindWeChat(String weChatId, String weChatName) {
+    		this.code = UUIDGenerator.generate();
+    		this.status = EmployeeStatus.BOUND.getCode();
+    		this.wechatId = StringUtils.trimToEmpty(weChatId);
+    		this.wechatName = StringUtils.trimToEmpty(weChatName);
+    		this.createDate = DateUtils.getCurrentDateTime();
     }
 }
