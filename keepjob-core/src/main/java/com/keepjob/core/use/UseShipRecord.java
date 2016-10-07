@@ -2,6 +2,11 @@ package com.keepjob.core.use;
 
 import java.util.Date;
 
+import com.keepjob.common.util.DateUtils;
+import com.keepjob.common.util.StringUtils;
+import com.keepjob.common.util.UUIDGenerator;
+import com.keepjob.core.employee.Employee;
+
 public class UseShipRecord {
     private String code;
 
@@ -22,8 +27,18 @@ public class UseShipRecord {
     private String userName;
 
     private Integer number;
+    
+    private String creator;
 
-    public String getCode() {
+    public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public String getCode() {
         return code;
     }
 
@@ -101,5 +116,41 @@ public class UseShipRecord {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+    
+    /**
+     * 创建记录
+     * @param employee
+     */
+    public void create(Employee employee){
+    		this.setCode(UUIDGenerator.generate());
+    		this.setCreator(StringUtils.trimToEmpty(employee.getCode()));
+    		this.setUseDate(DateUtils.getCurrentDateTime());
+    		this.setStatus(UseStatus.REGISTER.getCode());
+    }
+    
+    /**
+     * 执行中
+     * @param employee
+     */
+    public void implement(){
+    		this.setStartTime(DateUtils.getCurrentDateTime());
+    		this.setStatus(UseStatus.IMPLEMENT.getCode());
+    }
+    
+    /**
+     * 完成
+     * @param employee
+     */
+    public void complete() {
+    		this.setEndTime(DateUtils.getCurrentDateTime());
+    		this.setStatus(UseStatus.COMPLETE.getCode());
+    }
+    
+    /**
+     * 取消
+     */
+    public void cancel(){
+    		this.setStatus(UseStatus.CANCEL.getCode());
     }
 }

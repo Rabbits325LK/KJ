@@ -3,13 +3,15 @@ package com.keepjob.wechat;
 import javax.servlet.http.HttpServletRequest;
 
 import org.sword.wechat4j.WechatSupport;
-import org.sword.wechat4j.user.LanguageType;
 import org.sword.wechat4j.user.User;
 import org.sword.wechat4j.user.UserManager;
 
+import com.keepjob.common.spring.SpringBeanFactory;
+import com.keepjob.core.employee.EmployeeHandler;
+
 public class KeepJob  extends WechatSupport{
 
-	
+	private EmployeeHandler employeeHandler = (EmployeeHandler)SpringBeanFactory.getBean("employeeHandler");
 	
 	public KeepJob(HttpServletRequest request) {
 		super(request);
@@ -59,6 +61,14 @@ public class KeepJob  extends WechatSupport{
 		String userName = this.wechatRequest.getFromUserName();
 		UserManager userManager = new UserManager();
 		User user = userManager.getUserInfo(userName);
+		
+		System.out.println(userName);
+		if(employeeHandler.existWeChat(userName)){
+			System.out.println("已绑定");
+		} else {
+			System.out.println("未绑定");
+		}
+		
         String content = user.getNickName() + "，有什么可以帮到您?";
         responseText(content);
 	}
@@ -154,7 +164,6 @@ public class KeepJob  extends WechatSupport{
 	@Override
 	protected void view() {
 		// TODO Auto-generated method stub
-		MenuUtil menuUtil = new MenuUtil();
 		
 		System.out.println("click View");
 	}

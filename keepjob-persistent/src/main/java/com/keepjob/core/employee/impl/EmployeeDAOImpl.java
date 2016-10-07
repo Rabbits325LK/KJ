@@ -60,7 +60,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			criteria.andEqualTo("code", StringUtils.trimToEmpty(code));
 		}
 		if(StringUtils.isNotEmpty(wechatId)){
-			criteria.andEqualTo("wechatId", StringUtils.trimToEmpty(wechatId));
+			criteria.andEqualTo("wechat_id", StringUtils.trimToEmpty(wechatId));
 		}
 		try {
 			Integer rows = this.employeeMapper.countByExample(example);
