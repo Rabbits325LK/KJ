@@ -18,7 +18,7 @@ public class InitWeChatController {
 
 	@RequestMapping(value = "/init.html")
 	@ResponseBody
-	public String init(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	public void init(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 //		String resultToken = request.getParameter("token");
 //		
 //		System.out.println(resultToken);
@@ -29,9 +29,9 @@ public class InitWeChatController {
 		
 		String result = keepJob.execute();
 		System.out.println(result);
-		//response.getOutputStream().write(result.getBytes());
+		response.getOutputStream().write(result.getBytes());
 		//ModelAndView model = new ModelAndView();
-		return result;
+		//return result;
 	}
 }
 

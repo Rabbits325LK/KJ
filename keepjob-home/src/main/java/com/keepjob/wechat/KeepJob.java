@@ -19,7 +19,8 @@ public class KeepJob  extends WechatSupport{
 	@Override
 	protected void click() {
 		// TODO Auto-generated method stub
-		
+		String userName = this.wechatRequest.getFromUserName();
+		System.out.println("click:"+userName);
 	}
 
 	@Override
@@ -153,7 +154,9 @@ public class KeepJob  extends WechatSupport{
 	@Override
 	protected void view() {
 		// TODO Auto-generated method stub
+		MenuUtil menuUtil = new MenuUtil();
 		
+		System.out.println("click View");
 	}
 
 	@Override
