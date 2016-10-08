@@ -1,8 +1,8 @@
 package com.keepjob.core.use;
 
-import java.util.List;
-
 import com.keepjob.core.employee.Employee;
+
+import java.util.List;
 
 /**
  * 船艇使用记录接口
@@ -53,5 +53,11 @@ public interface UseShipRecordHandler {
 	 * @return
 	 */
 	public List<UserType> findUserTypes();
-	
+
+	/**
+	 * 通过员工编号获取当前正在执行的使用记录
+	 * @param employeeCode
+	 * @return
+	 */
+	public UseShipRecord getInUseShipRecordByEmployeeCode(String employeeCode);
 }

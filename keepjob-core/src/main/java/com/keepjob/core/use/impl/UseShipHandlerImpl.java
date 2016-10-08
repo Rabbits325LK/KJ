@@ -1,20 +1,15 @@
 package com.keepjob.core.use.impl;
 
-import java.util.List;
-
+import com.keepjob.common.exception.ApplicationException;
+import com.keepjob.common.util.StringUtils;
+import com.keepjob.core.employee.Employee;
+import com.keepjob.core.use.*;
+import com.keepjob.core.use.vo.UseShipRecordVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.keepjob.common.exception.ApplicationException;
-import com.keepjob.common.util.StringUtils;
-import com.keepjob.core.employee.Employee;
-import com.keepjob.core.use.UseShipRecord;
-import com.keepjob.core.use.UseShipRecordDAO;
-import com.keepjob.core.use.UseShipRecordHandler;
-import com.keepjob.core.use.UseStatus;
-import com.keepjob.core.use.UserType;
-import com.keepjob.core.use.UserTypeDAO;
+import java.util.List;
 
 @Service("useShipHandler")
 public class UseShipHandlerImpl implements UseShipRecordHandler {
@@ -83,13 +78,21 @@ public class UseShipHandlerImpl implements UseShipRecordHandler {
 	@Override
 	public List<UseShipRecord> finds() {
 		// TODO Auto-generated method stub
-		return this.useShipRecordDAO.finds();
+		return this.useShipRecordDAO.finds(null);
 	}
 
 	@Override
 	public List<UserType> findUserTypes() {
 		// TODO Auto-generated method stub
 		return this.userTypeDAO.finds();
+	}
+
+	@Override
+	public UseShipRecord getInUseShipRecordByEmployeeCode(String employeeCode) {
+		UseShipRecordVO vo = new UseShipRecordVO();
+		vo.setEmployeeCode(StringUtils.trimToEmpty(employeeCode));
+		vo.setStatus(UseStatus.IMPLEMENT.getCode());
+		return this.useShipRecordDAO.finds(vo).get(0);
 	}
 
 }
