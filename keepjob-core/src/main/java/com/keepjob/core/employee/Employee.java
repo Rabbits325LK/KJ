@@ -1,11 +1,10 @@
 package com.keepjob.core.employee;
 
-import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.keepjob.common.util.DateUtils;
 import com.keepjob.common.util.UUIDGenerator;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.Date;
 
 public class Employee {
     private String code;
@@ -133,10 +132,10 @@ public class Employee {
      * @param weChatId
      */
     public void bindWeChat(String weChatId, String weChatName) {
-    		this.code = UUIDGenerator.generate();
-    		this.status = EmployeeStatus.BOUND.getCode();
-    		this.wechatId = StringUtils.trimToEmpty(weChatId);
-    		this.wechatName = StringUtils.trimToEmpty(weChatName);
-    		this.createDate = DateUtils.getCurrentDateTime();
+            this.setCode(UUIDGenerator.generate());
+    		this.setStatus(StringUtils.trimToEmpty(EmployeeStatus.BOUND.getCode()));
+    		this.setWechatId(StringUtils.trimToEmpty(weChatId));
+    		this.setWechatName(StringUtils.trimToEmpty(weChatName));
+    		this.setCreateDate(DateUtils.getCurrentDateTime());
     }
 }
