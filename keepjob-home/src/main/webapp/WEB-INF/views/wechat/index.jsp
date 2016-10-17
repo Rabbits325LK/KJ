@@ -1,44 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html lang="zh-cmn-Hans">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/weui.min.css"/>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/weui.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/js/example/example.css"/>
 </head>
-<body>
-<div class="page">
-    <div class="page_hd">
-        <h1>wechat page</h1>
-        <a href="#" class="weui_btn weui_btn_primary">按钮</a>
-    </div>
-    <div class="page_bd">
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入qq号"/>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_vcode">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">手机号</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="请输入手机号">
-                </div>
-                <div class="weui-cell__ft">
-                    <a href="javascript:;" class="weui-vcode-btn">获取验证码</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
 
+<div class="container" id="container"></div>
+
+<link rel="import" href="./fragment/home.html">
+<link rel="import" href="./fragment/button.html">
+<link rel="import" href="fragment/list.html">
+<link rel="import" href="fragment/input.html">
+<link rel="import" href="./fragment/toast.html">
+<link rel="import" href="./fragment/dialog.html">
+<link rel="import" href="./fragment/progress.html">
+<link rel="import" href="./fragment/msg.html">
+<link rel="import" href="./fragment/msg_success.html">
+<link rel="import" href="./fragment/msg_warn.html">
+<link rel="import" href="./fragment/article.html">
+<link rel="import" href="./fragment/navbar.html">
+<link rel="import" href="./fragment/tabbar.html">
+<link rel="import" href="./fragment/panel.html">
+<link rel="import" href="./fragment/actionsheet.html">
+<link rel="import" href="./fragment/icons.html">
+<link rel="import" href="./fragment/searchbar.html">
+<link rel="import" href="./fragment/picker.html">
+<link rel="import" href="./fragment/footer.html">
+<link rel="import" href="./fragment/gallery.html">
+<link rel="import" href="./fragment/flex.html">
+<link rel="import" href="./fragment/loadmore.html">
+<link rel="import" href="./fragment/layers.html">
+<link rel="import" href="./fragment/uploader.html">
+<link rel="import" href="./fragment/preview.html">
+<script src="${pageContext.request.contextPath}/js/example/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="${pageContext.request.contextPath}/js/example/example.js"></script>
+</body>
 </html>
