@@ -6,16 +6,18 @@ public class Turnover {
     private String code;
 
     private String shipCode;
+    
+    private String shipName;
 
     private Date startTime;
 
     private Date endTime;
 
-    private Integer money;
+    private Double money;
 
     private String payType;
 
-    private Integer prePay;
+    private Double prePay;
 
     private String turnoverCode;
 
@@ -37,6 +39,14 @@ public class Turnover {
         this.code = code == null ? null : code.trim();
     }
 
+    public String getName() {
+        return shipName;
+    }
+
+    public void setName(String shipName) {
+        this.shipName = shipName == null ? null : shipName.trim();
+    }
+    
     public String getShipCode() {
         return shipCode;
     }
@@ -61,11 +71,11 @@ public class Turnover {
         this.endTime = endTime;
     }
 
-    public Integer getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 
@@ -77,11 +87,11 @@ public class Turnover {
         this.payType = payType == null ? null : payType.trim();
     }
 
-    public Integer getPrePay() {
+    public Double getPrePay() {
         return prePay;
     }
 
-    public void setPrePay(Integer prePay) {
+    public void setPrePay(Double prePay) {
         this.prePay = prePay;
     }
 

@@ -4,11 +4,12 @@
   <resultMap id="BaseResultMap" type="com.keepjob.turnover.Turnover" >
     <id column="code" property="code" jdbcType="VARCHAR" />
     <result column="ship_code" property="shipCode" jdbcType="VARCHAR" />
+    <result column="ship_name" property="shipName" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
     <result column="pay_type" property="payType" jdbcType="CHAR" />
-    <result column="pre_pay" property="prePay" jdbcType="INTEGER" />
+    <result column="pre_pay" property="prePay" jdbcType="DOUBLE" />
     <result column="turnover_code" property="turnoverCode" jdbcType="VARCHAR" />
     <result column="checker" property="checker" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
@@ -46,7 +47,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    code, ship_code, start_time, end_time, money, pay_type, pre_pay, turnover_code, checker, 
+    code, ship_code, ship_name, start_time, end_time, money, pay_type, pre_pay, turnover_code, checker, 
     remark, fireworks_day, create_date, creator
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keepjob.common.mybatis.MyBatisCriteria" >
