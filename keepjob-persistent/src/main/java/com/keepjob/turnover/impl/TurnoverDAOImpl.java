@@ -3,6 +3,7 @@ package com.keepjob.turnover.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.keepjob.common.exception.DatabaseException;
 import com.keepjob.common.mybatis.MyBatisCriteria;
@@ -11,6 +12,7 @@ import com.keepjob.turnover.Turnover;
 import com.keepjob.turnover.TurnoverDAO;
 import com.keepjob.turnover.TurnoverMapper;
 
+@Repository("turnoverDAO")
 public class TurnoverDAOImpl implements TurnoverDAO {
 
 	@Autowired

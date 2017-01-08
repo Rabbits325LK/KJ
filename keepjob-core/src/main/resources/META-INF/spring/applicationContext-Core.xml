@@ -16,7 +16,7 @@
 	default-lazy-init="false" default-autowire="byName">
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:META-INF/db/config.properties" />
-	<context:component-scan base-package="com.keepjob.sys.**,com.keepjob.tysd.**,com.keepjob.app.**,com.keepjob.core.**,com.keeopjob.turnover.**" />
+	<context:component-scan base-package="com.keepjob.sys.**,com.keepjob.tysd.**,com.keepjob.app.**,com.keepjob.core.**,com.keepjob.turnover.**" />
 
 	<!-- 数据库连接池延迟加载代理 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

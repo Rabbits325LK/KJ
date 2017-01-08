@@ -3,12 +3,14 @@ package com.keepjob.turnover.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.keepjob.common.util.StringUtils;
 import com.keepjob.turnover.Turnover;
 import com.keepjob.turnover.TurnoverDAO;
 import com.keepjob.turnover.TurnoverHandler;
 
+@Service("turnoverHandler")
 public class TurnoverHandlerImpl implements TurnoverHandler{
 
 	@Autowired
