@@ -5,12 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/js/bootstrap3/css/bootstrap.css">
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+<script src="${pageContext.request.contextPath }/js/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/views/login.js"></script>
 </head>
 <body>
