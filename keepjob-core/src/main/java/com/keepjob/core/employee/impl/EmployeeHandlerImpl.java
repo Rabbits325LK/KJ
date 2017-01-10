@@ -50,4 +50,9 @@ public class EmployeeHandlerImpl implements EmployeeHandler {
 		return this.employeeCategoryDAO.finds();
 	}
 
+	@Override
+	public Employee get(String code) {
+		return this.employeeDAO.get(code);
+	}
+
 }

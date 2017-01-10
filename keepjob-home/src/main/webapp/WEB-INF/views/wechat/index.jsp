@@ -1,44 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>WeUI</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/weui.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/js/example/example.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mobiscroll.custom-3.0.0-beta2.min.css"/>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+
 </head>
-<body ontouchstart>
-<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<body>
+<%--<div class="view active" id="mainView">
+    <header>
+        <h1></h1>
+    </header>
+    <!--List of Form Elements-->
+    <div class="pages">
+        <div class="panel" data-title="出船登记" id="list" data-selected="true">
+            <br>
+            <form>
+                <select>
+                    <option value="">请选择驾驶人</option>
+                    <option value="1">梁佳</option>
+                </select>
+                <input type="text" placeholder="姓名">
+                <input type="text" placeholder="游艇">
+                <textarea rows="6" placeholder="Enter your address"></textarea>
+            </form>
+        </div>
 
-<div class="container" id="container"></div>
+    </div>
+</div>--%>
+<div id="demo" style="display:none" mbsc-enhance>
+    <div class="mbsc-divider">出船登记</div>
+    <label for="employeeCode">
+        驾驶员
+        <select class="md-select" id="employeeCode">
+            <option value="">请选择</option>
+            <option value="1">梁佳</option>
+            <option value="2">袁昊</option>
+        </select>
+    </label>
+    <label>
+        游艇
+        <select class="md-select" id="shipCode">
+            <option value="">请选择</option>
+            <option value="1">曼德号</option>
+            <option value="2">红馆</option>
+        </select>
+    </label>
 
-<link rel="import" href="./fragment/home.html">
-<link rel="import" href="./fragment/button.html">
-<link rel="import" href="fragment/list.html">
-<link rel="import" href="fragment/input.html">
-<link rel="import" href="./fragment/toast.html">
-<link rel="import" href="./fragment/dialog.html">
-<link rel="import" href="./fragment/progress.html">
-<link rel="import" href="./fragment/msg.html">
-<link rel="import" href="./fragment/msg_success.html">
-<link rel="import" href="./fragment/msg_warn.html">
-<link rel="import" href="./fragment/article.html">
-<link rel="import" href="./fragment/navbar.html">
-<link rel="import" href="./fragment/tabbar.html">
-<link rel="import" href="./fragment/panel.html">
-<link rel="import" href="./fragment/actionsheet.html">
-<link rel="import" href="./fragment/icons.html">
-<link rel="import" href="./fragment/searchbar.html">
-<link rel="import" href="./fragment/picker.html">
-<link rel="import" href="./fragment/footer.html">
-<link rel="import" href="./fragment/gallery.html">
-<link rel="import" href="./fragment/flex.html">
-<link rel="import" href="./fragment/loadmore.html">
-<link rel="import" href="./fragment/layers.html">
-<link rel="import" href="./fragment/uploader.html">
-<link rel="import" href="./fragment/preview.html">
-<script src="${pageContext.request.contextPath}/js/example/zepto.min.js"></script>
-<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="${pageContext.request.contextPath}/js/example/example.js"></script>
+
+</div>
+
+
 </body>
 </html>

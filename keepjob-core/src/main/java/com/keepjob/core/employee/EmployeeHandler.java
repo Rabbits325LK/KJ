@@ -35,4 +35,6 @@ public interface EmployeeHandler {
 	 * @return
 	 */
 	public List<EmployeeCategory> findEmployeeCategorys();
+
+	public Employee get(String code);
 }

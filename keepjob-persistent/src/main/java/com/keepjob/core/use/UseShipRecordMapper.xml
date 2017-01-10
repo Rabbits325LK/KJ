@@ -9,7 +9,7 @@
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="CHAR" />
-    <result column="user_type" property="userType" jdbcType="CHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
